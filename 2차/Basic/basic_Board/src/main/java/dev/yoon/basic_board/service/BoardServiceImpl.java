@@ -42,13 +42,19 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public void updateBoard(Long id, BoardDto boardDto) {
-        Board board = boardRepository.findOne(id);
-        board.setName(boardDto.getName());
+    public boolean updateBoard(Long id, BoardDto boardDto) {
+        return boardRepository.updateBoard(id, boardDto);
+
     }
     @Override
-    public void deleteBoard(Long id) {
+    public boolean deleteBoard(Long id) {
         Board board = this.boardRepository.findOne(id);
+        if(board == null) {
+            return false;
+        }
         this.boardRepository.delete(board);
+        return true;
+
+
     }
 }

@@ -10,7 +10,6 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,15 +25,17 @@ public class PostServiceImpl implements PostService {
 
 
     @Override
-    public void createPost(PostDto postDto) throws Exception {
+    public PostDto createPost(Long boardId, PostDto postDto) throws Exception {
 
-        Board board = this.boardRepository.findOne(postDto.getBoardId());
-
+        Board board = this.boardRepository.findOne(boardId);
+        if (board == null) {
+            return null;
+        }
         Post post = Post.createPost(postDto);
-
         board.addPost(post);
 
         this.postRepository.save(post);
+        return postDto;
     }
 
     @Override
@@ -42,11 +43,12 @@ public class PostServiceImpl implements PostService {
 
         List<Post> postList = this.postRepository.findAll();
 
+        if(postList.isEmpty())
+            return null;
+
         List<PostDto> postDtos = new ArrayList<>();
-
         for (Post post : postList) {
-
-            PostDto postDto = PostDto.createPostDto(post);
+            PostDto postDto = PostDto.createPostDtoPassWordMasked(post);
             postDtos.add(postDto);
         }
         return postDtos;
@@ -54,29 +56,48 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    public List<PostDto> readPostAllbyBoardId(Long boardId) {
+        List<Post> postList = this.postRepository.findPostAllbyBoardId(boardId);
+
+        if(postList.isEmpty())
+            return null;
+
+        List<PostDto> postDtos = new ArrayList<>();
+        for (Post post : postList) {
+            PostDto postDto = PostDto.createPostDtoPassWordMasked(post);
+            postDtos.add(postDto);
+        }
+        return postDtos;
+    }
+
+    @Override
     public PostDto readPostOne(Long id) {
         Post post = this.postRepository.findById(id);
 
-        PostDto postDto = PostDto.createPostDto(post);
+        PostDto postDto = PostDto.createPostDtoPassWordMasked(post);
         return postDto;
     }
 
     @SneakyThrows
     @Override
-    public void updatePost(Long id, PostDto postDto) {
-
-        Post post = this.postRepository.findById(id);
-        post.update(postDto);
+    public boolean updatePost(Long boardId, Long postId, PostDto postDto) {
+        return postRepository.updatePost(boardId,postId,postDto);
 
     }
 
     @Override
-    public void deletePost(Long id, String pw) {
-        Post post = this.postRepository.findById(id);
-        // 전달된 비밀번호가 동일한 경우 삭제
-        if(post.getPw().equals(pw)) {
-            this.postRepository.delete(post);
-        }
+    public boolean deletePost(Long boardId, Long postId, PostDto postDto) {
+        return this.postRepository.deletePost(boardId, postId, postDto.getPw());
+    }
 
+    @Override
+    public PostDto readPostOneByBoardId(Long boardId, Long postId) {
+        Post post = this.postRepository.findPostOnebyBoardId(boardId, postId);
+
+        if(post == null) {
+            return null;
+        }
+        PostDto postDto = PostDto.createPostDtoPassWordMasked(post);
+        return postDto;
     }
 }

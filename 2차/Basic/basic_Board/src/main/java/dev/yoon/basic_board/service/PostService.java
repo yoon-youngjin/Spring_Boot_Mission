@@ -1,19 +1,22 @@
 package dev.yoon.basic_board.service;
 
 import dev.yoon.basic_board.dto.PostDto;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
 public interface PostService {
 
-    void createPost(PostDto postDto) throws Exception;
+    PostDto createPost(Long boardId, PostDto postDto) throws Exception;
 
     List<PostDto> readPostAll();
 
+    List<PostDto> readPostAllbyBoardId(Long id);
+
     PostDto readPostOne(Long id);
 
-    void updatePost(Long id, PostDto postDto);
+    boolean updatePost(Long boardId, Long postId, PostDto postDto);
 
-    void deletePost(Long id,String pw);
+    boolean deletePost(Long boardId, Long postId, PostDto postDto);
+
+    PostDto readPostOneByBoardId(Long boardId, Long postId);
 }

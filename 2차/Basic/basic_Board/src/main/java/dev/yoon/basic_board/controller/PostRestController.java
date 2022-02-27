@@ -1,70 +1,99 @@
 package dev.yoon.basic_board.controller;
 
 
+import dev.yoon.basic_board.domain.Post;
 import dev.yoon.basic_board.dto.PostDto;
 import dev.yoon.basic_board.service.PostService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.util.CollectionUtils;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @Slf4j
-@RequestMapping("post")
+@RequestMapping("board/{boardId}/post")
+// 세부조건 2
 @RequiredArgsConstructor
 public class PostRestController {
 
     private final PostService postService;
 
-    @PostMapping(value = "{boardId}")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void createPost(
+    public ResponseEntity<PostDto> createPost(
             @PathVariable("boardId") Long id,
             @RequestBody PostDto postDto,
             HttpServletRequest request) throws Exception {
 
         postDto.setBoardId(id);
 //        log.info(request.getHeader("Content-Type"));
-        this.postService.createPost(postDto);
+        PostDto dto = this.postService.createPost(id,postDto);
+
+        if(dto == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(dto);
     }
 
     @GetMapping()
-    public List<PostDto> readPostAll() {
+    public ResponseEntity<List<PostDto>> readPostAll(
+            @PathVariable("boardId") Long boardId
+    ) {
         log.info("in read post all");
-        List<PostDto> postDtos = this.postService.readPostAll();
-        return postDtos;
+
+        List<PostDto> postDtoList = this.postService.readPostAllbyBoardId(boardId);
+        if(postDtoList == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(postDtoList);
+
     }
 
-    @GetMapping("{id}")
-    public PostDto readPostOne(@PathVariable("id") Long id) {
+    @GetMapping("{postId}")
+    public ResponseEntity<PostDto> readPostOne(
+            @PathVariable("boardId") Long boardId,
+            @PathVariable("postId") Long postId) {
         log.info("in read post one");
-        return this.postService.readPostOne(id);
+
+        PostDto postDto = this.postService.readPostOneByBoardId(boardId, postId);
+        if(postDto == null)
+            return ResponseEntity.notFound().build();
+
+        return ResponseEntity.ok(postDto);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @PutMapping("{id}")
-    public void updatePost(
-            @PathVariable("id") Long id,
+    @PutMapping("{postId}")
+    public ResponseEntity<?> updatePost(
+            @PathVariable("boardId") Long boardId,
+            @PathVariable("postId") Long postId,
             @RequestBody PostDto postDto) {
-        log.info("target id: " + id);
+        log.info("target id: " + postId);
         log.info("update content: " + postDto);
 
-        this.postService.updatePost(id, postDto);
+        if (!postService.updatePost(boardId, postId, postDto))
+            return ResponseEntity.notFound().build();
 
+        return ResponseEntity.noContent().build();
 
     }
 
     @ResponseStatus(HttpStatus.ACCEPTED)
-    @DeleteMapping("{id}")
-    public void deletePost(@PathVariable("id") Long id, @RequestBody PostDto postDto) {
+    @DeleteMapping("{postId}")
+    public ResponseEntity<?> deletePost(
+            @PathVariable("boardId") Long boardId,
+            @PathVariable("postId") Long postId,
+            @RequestBody PostDto postDto) {
 
-        this.postService.deletePost(id, postDto.getPw());
+        if (!this.postService.deletePost(boardId, postId, postDto))
+            return ResponseEntity.notFound().build();
+
+        return ResponseEntity.noContent().build();
+
     }
 
 }

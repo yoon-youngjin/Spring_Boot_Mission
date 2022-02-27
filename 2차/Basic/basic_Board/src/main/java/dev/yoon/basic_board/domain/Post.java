@@ -11,7 +11,6 @@ import javax.persistence.*;
 @Setter
 public class Post {
 
-
     @Id
     @GeneratedValue
     @Column(name = "post_id")
@@ -28,7 +27,6 @@ public class Post {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "board_id")
     private Board board;
-
 
 
     // 연관관계 편의 메소드
@@ -49,9 +47,10 @@ public class Post {
 
 
     public void update(PostDto postDto) {
-        this.setWriter(postDto.getWriter());
-        this.setPw(postDto.getPw());
-        this.setContent(postDto.getContent());
-        this.setTitle(postDto.getTitle());
+        this.setWriter(postDto.getWriter() == null ? writer : postDto.getWriter());
+        this.setPw(postDto.getPw() == null ? pw : postDto.getPw());
+        this.setContent(postDto.getContent() == null ? content : postDto.getContent());
+        this.setTitle(postDto.getTitle() == null ? title : postDto.getTitle());
+
     }
 }

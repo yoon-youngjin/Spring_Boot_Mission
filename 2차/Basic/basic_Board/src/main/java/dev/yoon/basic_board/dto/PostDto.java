@@ -21,14 +21,16 @@ public class PostDto {
 
     private String pw;
 
-    public static PostDto createPostDto(Post post) {
+    public static PostDto createPostDtoPassWordMasked(Post post) {
         PostDto postDto = new PostDto();
         postDto.setBoardId(post.getBoard().getId());
         postDto.setTitle(post.getTitle());
         postDto.setWriter(post.getWriter());
-        postDto.setPw(post.getPw());
+        postDto.setPw("*****");
         postDto.setContent(post.getContent());
         return postDto;
     }
+
+
 
 }
