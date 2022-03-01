@@ -27,7 +27,6 @@ public class BoardRestController {
 
     @PostMapping()
     public ResponseEntity<BoardDto> createBoard(@RequestBody BoardDto boardDto, HttpServletRequest request) {
-//        log.info(request.getHeader("Content-Type"));
         Board board = Board.createBoard(boardDto);
         this.boardService.createBoard(board);
         return ResponseEntity.ok(boardDto);
@@ -35,13 +34,11 @@ public class BoardRestController {
 
     @GetMapping()
     public ResponseEntity<List<BoardDto>> readBoardAll() {
-        log.info("in read Board all");
         return ResponseEntity.ok(this.boardService.readBoardAll());
     }
 
     @GetMapping("{id}")
     public ResponseEntity<BoardDto> readBoardOne(@PathVariable("id") Long id) {
-        log.info("in read Board one");
         return ResponseEntity.ok(this.boardService.readBoard(id));
     }
 

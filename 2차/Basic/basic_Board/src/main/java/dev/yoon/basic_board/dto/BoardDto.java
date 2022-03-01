@@ -17,12 +17,13 @@ public class BoardDto {
 
     private String name;
 
-    private List<Long> post_id = new ArrayList<>();
+    private List<Long> post_id;
 
 
     public static BoardDto createBoardDto(Board board) {
         BoardDto boardDto = new BoardDto();
         boardDto.setName(board.getName());
+
         for (Post post : board.getPosts()) {
             boardDto.post_id.add(post.getId());
         }
