@@ -1,18 +1,25 @@
 package dev.yoon.board.repository;
 
+import com.querydsl.jpa.impl.JPAQueryFactory;
 import dev.yoon.board.domain.Board;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
+import static dev.yoon.board.domain.QBoard.*;
+
 @Repository
-@RequiredArgsConstructor
 public class BoardRepositoryImpl implements BoardRepository {
 
     @PersistenceContext
     private final EntityManager em;
+    private final JPAQueryFactory query;
+
+    public BoardRepositoryImpl(EntityManager em) {
+        this.em = em;
+        this.query = new JPAQueryFactory(em);
+    }
 
     @Override
     public void save(Board board) {
@@ -21,23 +28,27 @@ public class BoardRepositoryImpl implements BoardRepository {
 
     @Override
     public List<Board> findAll() {
-        return em.createQuery("select b from Board b", Board.class).getResultList();
+        return query.select(board)
+                .from(board)
+                .fetch();
     }
 
     @Override
     public Board findOne(Long id) {
-        return em.find(Board.class, id);
+        return query
+                .select(board)
+                .from(board)
+                .where(board.id.eq(id))
+                .fetchOne();
+
     }
 
-    @Override
-    public List<Board> findByTitle(String name) {
-        return em.createQuery("select b from Board b where b.name= :name", Board.class)
-                .setParameter("name", name)
-                .getResultList();
-    }
 
     @Override
     public void delete(Board board) {
+
         em.remove(board);
     }
+
+
 }

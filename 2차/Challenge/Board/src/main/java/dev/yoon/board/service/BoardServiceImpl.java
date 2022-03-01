@@ -27,7 +27,7 @@ public class BoardServiceImpl implements BoardService {
         List<Board> boards = this.boardRepository.findAll();
         List<BoardDto> boardDtos = new ArrayList<>();
         for(Board board : boards) {
-            BoardDto boardDto = BoardDto.createBoardDto(board);
+            BoardDto boardDto = new BoardDto(board);
             boardDtos.add(boardDto);
         }
         return boardDtos;
@@ -36,17 +36,26 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public BoardDto readBoard(Long id) {
         Board board = this.boardRepository.findOne(id);
-        return BoardDto.createBoardDto(board);
+        BoardDto boardDto = new BoardDto(board);
+        return boardDto;
     }
 
     @Override
-    public void updateBoard(Long id, BoardDto boardDto) {
+    public boolean updateBoard(Long id, BoardDto boardDto) {
         Board board = boardRepository.findOne(id);
+        if(board == null) {
+            return false;
+        }
         board.setName(boardDto.getName());
+        return true;
     }
     @Override
-    public void deleteBoard(Long id) {
+    public boolean deleteBoard(Long id) {
         Board board = this.boardRepository.findOne(id);
+        if(board == null) {
+            return false;
+        }
         this.boardRepository.delete(board);
+        return true;
     }
 }

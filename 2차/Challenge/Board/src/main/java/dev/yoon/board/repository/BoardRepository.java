@@ -11,8 +11,6 @@ public interface BoardRepository {
 
     Board findOne(Long id);
 
-    List<Board> findByTitle(String title);
-
     void delete(Board board);
 
 }

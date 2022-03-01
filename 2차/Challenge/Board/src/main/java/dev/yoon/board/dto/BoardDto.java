@@ -1,10 +1,11 @@
 package dev.yoon.board.dto;
 
 import dev.yoon.board.domain.Board;
-import dev.yoon.board.domain.Post;
 import lombok.*;
-import java.util.ArrayList;
+
+import javax.validation.constraints.NotEmpty;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -13,20 +14,29 @@ import java.util.List;
 @ToString
 public class BoardDto {
 
+    private Long id;
+
+    @NotEmpty
     private String name;
 
-    private List<Long> post_id = new ArrayList<>();
+    private List<PostDto> posts;
 
-
-
-    public static BoardDto createBoardDto(Board board) {
-        BoardDto boardDto = new BoardDto();
-        boardDto.setName(board.getName());
-        for (Post post : board.getPosts()) {
-            boardDto.post_id.add(post.getId());
-        }
-        return boardDto;
+    public BoardDto(Board board) {
+        this.id = board.getId();
+        this.name = board.getName();
+        this.posts = board.getPosts().stream()
+                .map(post -> new PostDto(post))
+                .collect(Collectors.toList());
     }
+
+//    public static BoardDto createBoardDto(Board board) {
+//        BoardDto boardDto = new BoardDto();
+//        boardDto.setName(board.getName());
+//        for (Post post : board.getPosts()) {
+//            boardDto.post_id.add(post.getId());
+//        }
+//        return boardDto;
+//    }
 
 
 

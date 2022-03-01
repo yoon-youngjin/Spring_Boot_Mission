@@ -36,19 +36,18 @@ public class Post {
             cascade = {CascadeType.PERSIST, CascadeType.REMOVE},
             orphanRemoval = true
     )
-    private List<File> files = new ArrayList<>();
-
-    public void addFile(File file) {
-        this.files.add(file);
-        file.setPost(this);
-    }
-
+    private List<Media> media = new ArrayList<>();
 
     // 연관관계 편의 메소드
 //    public void setBoard(Board board) {
 //        this.board = board;
 //        board.getPosts().add(this);
 //    }
+
+    public void addFile(Media media) {
+        this.media.add(media);
+        media.setPost(this);
+    }
 
     // 생성 메소드
     public static Post createPost(PostDto postDto) {

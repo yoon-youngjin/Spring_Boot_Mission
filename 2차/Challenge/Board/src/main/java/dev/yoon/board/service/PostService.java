@@ -1,19 +1,22 @@
 package dev.yoon.board.service;
 
 import dev.yoon.board.dto.PostDto;
+import lombok.SneakyThrows;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
 public interface PostService {
 
-    void createPost(PostDto postDto, List<MultipartFile> files) throws Exception;
+    PostDto createPost(Long boardId, PostDto postDto, List<MultipartFile> files) throws Exception;
 
-    List<PostDto> readPostAll();
+    PostDto readPostOneByBoardId(Long boardId, Long postId);
 
-    PostDto readPostOne(Long id);
+    List<PostDto> readPostAllByBoardId(Long boardId);
 
-    void updatePost(Long id, PostDto postDto, List<MultipartFile> addFileList);
+    void updatePost(Long boardId, Long postId, PostDto postDto, List<MultipartFile> multipartFileList);
 
-    void deletePost(Long id,String pw);
+    boolean deletePost(Long boardId, Long postId, PostDto postDto);
+
+
 }

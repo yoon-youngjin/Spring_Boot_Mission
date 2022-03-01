@@ -32,6 +32,4 @@ public class Board {
         board.setName(boardDto.getName());
         return board;
     }
-
-
 }
