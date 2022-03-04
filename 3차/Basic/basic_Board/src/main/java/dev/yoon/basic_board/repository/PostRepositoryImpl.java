@@ -1,6 +1,7 @@
 package dev.yoon.basic_board.repository;
 
 
+import dev.yoon.basic_board.domain.Board;
 import dev.yoon.basic_board.domain.Post;
 import dev.yoon.basic_board.dto.PostDto;
 import lombok.RequiredArgsConstructor;
@@ -24,42 +25,39 @@ public class PostRepositoryImpl implements PostRepository {
         em.persist(post);
     }
 
-    @Override
-    public List<Post> findAll() {
-        return em.createQuery("select b from Post b", Post.class).getResultList();
-    }
 
     @Override
     public List<Post> findPostAllbyBoardId(Long boardId) {
-        return em.createQuery("select p from Post p where p.board.id = :boardId", Post.class)
+        return em.createQuery("select p from Post p" +
+                        " join fetch p.board" +
+                        " where p.board.id = :boardId", Post.class)
                 .setParameter("boardId", boardId)
                 .getResultList();
     }
 
+    /**
+     * 비교 !!!
+     */
     @Override
     public Post findPostOnebyBoardId(Long boardId, Long postId) {
         List<Post> postList = em.createQuery("select p from Post p where p.id =:postId AND p.board.id = :boardId", Post.class)
-                .setParameter("postId",postId)
+                .setParameter("postId", postId)
                 .setParameter("boardId", boardId)
                 .getResultList();
 
         return postList.get(0);
     }
 
-    @Override
-    public Post findById(Long id) {
-        return em.find(Post.class, id);
-    }
 
     @Override
     public boolean updatePost(Long boardId, Long postId, PostDto postDto) {
 
         List<Post> postList = em.createQuery("select p from Post p where p.id =:postId AND p.board.id = :boardId", Post.class)
-                .setParameter("postId",postId)
+                .setParameter("postId", postId)
                 .setParameter("boardId", boardId)
                 .getResultList();
 
-        if(postList.isEmpty()) {
+        if (postList.isEmpty()) {
             return false;
         }
 
@@ -72,11 +70,11 @@ public class PostRepositoryImpl implements PostRepository {
     public boolean deletePost(Long boardId, Long postId, String pw) {
 
         List<Post> postList = em.createQuery("select p from Post p where p.id =:postId AND p.board.id = :boardId", Post.class)
-                .setParameter("postId",postId)
+                .setParameter("postId", postId)
                 .setParameter("boardId", boardId)
                 .getResultList();
 
-        if(postList.isEmpty()) {
+        if (postList.isEmpty()) {
             return false;
         }
 
