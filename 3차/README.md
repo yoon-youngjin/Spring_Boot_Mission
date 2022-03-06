@@ -2,7 +2,8 @@
 [LikeLion]The Origin: Java Spring Boot 과제
 
 ### 3차 미션 스크린샷
-Basic
+## Basic
+
 ### 세부 조건 1
 #### UserEntity 에 대한 CRUD를 작성합시다.
 ### User-Create 
@@ -32,7 +33,8 @@ Basic
 #### User - Post생성 후 User에 반영
 ![image](https://user-images.githubusercontent.com/83503188/156919357-c23b351a-e7b5-46a3-9188-5fa8ba767ff5.png)
 
-Challenge
+## Challenge
+
 ### AreaEntity - 세부 조건 1
 ```
 @Entity
