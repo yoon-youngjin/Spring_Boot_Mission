@@ -35,7 +35,9 @@
 
 ## Challenge
 
-### AreaEntity - 세부 조건 1
+### 세부 조건 1
+#### 생성된 테이블의 실제 이름에는 Entity 라는 문구가 들어가지 않도록 @Table 어노테이션을 활용합시다.
+### AreaEntity 
 ```
 @Entity
 @Getter @Setter
