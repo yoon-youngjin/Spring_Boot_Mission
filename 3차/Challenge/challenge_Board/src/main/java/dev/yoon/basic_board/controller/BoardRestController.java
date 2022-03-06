@@ -3,12 +3,10 @@ package dev.yoon.basic_board.controller;
 
 import dev.yoon.basic_board.domain.Board;
 import dev.yoon.basic_board.dto.BoardDto;
+import dev.yoon.basic_board.dto.Result;
 import dev.yoon.basic_board.service.BoardService;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -67,13 +65,6 @@ public class BoardRestController {
             return ResponseEntity.notFound().build();
 
         return ResponseEntity.noContent().build();
-    }
-
-    @Data
-    @AllArgsConstructor
-    static class Result<T> {
-        private Integer count;
-        private T data;
     }
 
 

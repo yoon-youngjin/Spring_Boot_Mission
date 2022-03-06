@@ -1,6 +1,7 @@
 package dev.yoon.basic_board.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import dev.yoon.basic_board.dto.PostDto;
 import dev.yoon.basic_board.dto.shop.ShopPostDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -37,6 +38,21 @@ public class ShopPost {
     }
 
 
+    public static ShopPostDto createShopPostDto(ShopPost shopPost) {
 
+        ShopPostDto shopPostDto = new ShopPostDto();
+        shopPostDto.setShopId(shopPost.getShop().getId());
+        shopPostDto.setUserId(shopPost.getUser().getId());
+        shopPostDto.setTitle(shopPost.getTitle());
+        shopPostDto.setContent(shopPost.getContent());
+        return shopPostDto;
 
+    }
+
+    public void update(ShopPostDto shopPostDto) {
+
+        this.setTitle(shopPostDto.getTitle());
+        this.setContent(shopPostDto.getContent());
+
+    }
 }

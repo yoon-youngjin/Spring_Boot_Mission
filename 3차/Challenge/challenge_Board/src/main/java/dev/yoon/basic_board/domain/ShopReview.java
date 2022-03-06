@@ -35,4 +35,22 @@ public class ShopReview {
         this.content = shopReviewDto.getContent();
 
     }
+
+    public static ShopReviewDto createShopReviewDto(ShopReview shopReview) {
+
+        ShopReviewDto shopReviewDto = new ShopReviewDto();
+        shopReviewDto.setShopId(shopReview.getShop().getId());
+        shopReviewDto.setUserId(shopReview.getUser().getId());
+        shopReviewDto.setTitle(shopReview.getTitle());
+        shopReviewDto.setContent(shopReview.getContent());
+        return shopReviewDto;
+
+    }
+
+    public void update(ShopReviewDto shopReviewDto) {
+
+        this.setTitle(shopReviewDto.getTitle());
+        this.setContent(shopReviewDto.getContent());
+
+    }
 }

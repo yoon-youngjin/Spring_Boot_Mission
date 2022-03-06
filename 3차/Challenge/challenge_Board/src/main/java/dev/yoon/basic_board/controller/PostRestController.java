@@ -75,9 +75,7 @@ public class PostRestController {
 
         if (!postService.updatePost(boardId, postId, postDto))
             return ResponseEntity.notFound().build();
-
         return ResponseEntity.noContent().build();
-
     }
 
     @ResponseStatus(HttpStatus.ACCEPTED)

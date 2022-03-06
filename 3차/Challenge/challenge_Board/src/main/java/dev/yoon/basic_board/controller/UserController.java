@@ -1,9 +1,8 @@
 package dev.yoon.basic_board.controller;
 
+import dev.yoon.basic_board.dto.Result;
 import dev.yoon.basic_board.dto.UserDto;
 import dev.yoon.basic_board.service.UserService;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -72,13 +71,5 @@ public class UserController {
         return ResponseEntity.noContent().build();
 
     }
-
-    @Data
-    @AllArgsConstructor
-    static class Result<T> {
-        private Integer count;
-        private T data;
-    }
-
 
 }

@@ -2,9 +2,11 @@ package dev.yoon.basic_board.dto.shop;
 
 import dev.yoon.basic_board.domain.ShopPost;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter @Setter
+@NoArgsConstructor
 public class ShopPostDto {
 
     private Long userId;

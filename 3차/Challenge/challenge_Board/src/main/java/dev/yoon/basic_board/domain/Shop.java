@@ -29,10 +29,13 @@ public class Shop {
     @Embedded
     private Address address;
 
-    @OneToMany(mappedBy = "shop", cascade = CascadeType.ALL)
+    // orphanRemoval = true : 고아가 된 자식 엔티티 자동 삭제
+    // CascadeType.all : 연관관계가 하나인 경우만 가능
+    // shoppost,shopreview 두개가 있으므로 불가
+    @OneToMany(mappedBy = "shop",orphanRemoval = true)
     private List<ShopPost> shopPosts;
 
-    @OneToMany(mappedBy = "shop", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "shop",orphanRemoval = true)
     private List<ShopReview> shopReviews;
 
 
