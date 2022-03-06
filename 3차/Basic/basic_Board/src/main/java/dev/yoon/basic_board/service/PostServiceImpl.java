@@ -39,6 +39,7 @@ public class PostServiceImpl implements PostService {
 
         User user = optionalUser.get();
         Post post = Post.createPost(postDto);
+        postDto.setBoardName(board.getName());
         user.addPost(post);
         board.addPost(post);
 

@@ -58,14 +58,18 @@ public class ShopService {
 
     public boolean updateShop(Long shopId, ShopDto shopDto) {
         Optional<Shop> optionalShop = shopRepository.findById(shopId);
+
         if (optionalShop.isEmpty())
             return false;
 
         Shop shop = optionalShop.get();
+        // 기존 사용자가 아닐 경우 예외
+        if (shopDto.getUserId() != shop.getUser().getId())
+            return false;
+
+
         shop.update(shopDto);
         return true;
-
-
     }
 
     public boolean deleteShop(Long shopId) {
