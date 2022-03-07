@@ -34,7 +34,6 @@ public class ShopPost {
     public ShopPost(ShopPostDto shopPostDto) {
         this.title = shopPostDto.getTitle();
         this.content = shopPostDto.getContent();
-
     }
 
 

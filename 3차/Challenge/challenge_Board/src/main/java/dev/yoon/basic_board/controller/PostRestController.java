@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -23,7 +24,7 @@ public class PostRestController {
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<PostDto> createPost(
             @PathVariable("boardId") Long id,
-            @RequestBody PostDto postDto,
+            @RequestBody @Valid PostDto postDto,
             HttpServletRequest request) throws Exception {
 
         postDto.setBoardId(id);

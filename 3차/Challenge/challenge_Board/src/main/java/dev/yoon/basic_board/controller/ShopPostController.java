@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 
@@ -24,7 +25,7 @@ public class ShopPostController {
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<ShopPostDto> creatShopPost(
             @PathVariable("shopId") Long shopId,
-            @RequestBody ShopPostDto shopPostDto) {
+            @RequestBody @Valid ShopPostDto shopPostDto) {
         ShopPostDto dto = this.shopPostService.createShopPost(shopId, shopPostDto);
 
         if (dto == null) {

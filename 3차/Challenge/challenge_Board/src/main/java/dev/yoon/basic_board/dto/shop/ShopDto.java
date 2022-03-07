@@ -7,6 +7,7 @@ import dev.yoon.basic_board.domain.ShopReview;
 import dev.yoon.basic_board.dto.PostDto;
 import lombok.*;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,10 +17,13 @@ import java.util.stream.Collectors;
 @ToString
 public class ShopDto {
 
+    @NotNull
     private Long userId;
 
+    @NotNull
     private Category category;
 
+    @NotNull
     private Address address;
 
     private List<ShopPostDto> shopPostDtos;

@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -23,7 +24,7 @@ public class ShopReviewController {
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<ShopReviewDto> creatShopReview(
             @PathVariable("shopId") Long shopId,
-            @RequestBody ShopReviewDto shopReviewDto) {
+            @RequestBody @Valid ShopReviewDto shopReviewDto) {
         ShopReviewDto dto = this.shopReviewSerive.createShopReview(shopId,shopReviewDto);
 
         if(dto == null) {

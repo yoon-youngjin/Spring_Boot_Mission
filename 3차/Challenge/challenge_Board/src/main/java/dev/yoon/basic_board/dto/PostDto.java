@@ -3,6 +3,9 @@ package dev.yoon.basic_board.dto;
 import dev.yoon.basic_board.domain.Post;
 import lombok.*;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 
 @Getter
 @Setter
@@ -12,18 +15,26 @@ import lombok.*;
 @ToString
 public class PostDto {
 
+    @NotNull
     private Long userId;
 
     private Long boardId;
 
     private String boardName;
 
+    @NotNull
+    @Size(min = 3, max = 10, message = "size between 3 - 10")
     private String title;
 
+    @NotNull
+    @Size(max = 40, message = "size under 40")
     private String content;
 
+    @NotNull
+    @Size(min = 3, max = 10, message = "size between 3 - 10")
     private String writer;
 
+    @NotNull
     private String pw;
 
 
