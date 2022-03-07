@@ -14,7 +14,6 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-@Transactional
 public class PostRepositoryImpl implements PostRepository {
 
     @PersistenceContext
@@ -88,6 +87,15 @@ public class PostRepositoryImpl implements PostRepository {
         return true;
 
 
+    }
+
+    @Override
+    public List<Post> findPostAllbyUserId(Long userId) {
+        return em.createQuery("select p from Post p" +
+                        " join fetch p.board" +
+                        " where p.user.id = :userId", Post.class)
+                .setParameter("userId", userId)
+                .getResultList();
     }
 
 }

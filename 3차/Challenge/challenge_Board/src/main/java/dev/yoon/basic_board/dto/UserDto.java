@@ -2,6 +2,7 @@ package dev.yoon.basic_board.dto;
 
 import dev.yoon.basic_board.domain.Address;
 import dev.yoon.basic_board.domain.Location;
+import dev.yoon.basic_board.domain.Post;
 import dev.yoon.basic_board.domain.User;
 import lombok.*;
 
@@ -24,13 +25,13 @@ public class UserDto {
 
     private Location location;
 
-    public UserDto(User user) {
+    public UserDto(User user, List<Post> posts) {
         this.name = user.getName();
         this.verify = user.getVerify();
         this.address = user.getArea().getAddress();
         this.location = user.getArea().getLocation();
 
-        this.postDtos = user.getPostList().stream()
+        this.postDtos = posts.stream()
                 .map(post -> new PostDto(post))
                 .collect(Collectors.toList());
     }

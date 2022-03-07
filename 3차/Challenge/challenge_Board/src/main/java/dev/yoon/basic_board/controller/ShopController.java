@@ -3,8 +3,10 @@ package dev.yoon.basic_board.controller;
 import dev.yoon.basic_board.dto.Result;
 import dev.yoon.basic_board.dto.shop.ShopDto;
 import dev.yoon.basic_board.service.ShopService;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +21,7 @@ public class ShopController {
 
     private final ShopService shopService;
 
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<ShopDto> creatShop(
@@ -29,6 +32,7 @@ public class ShopController {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok(dto);
+
     }
 
     @GetMapping()

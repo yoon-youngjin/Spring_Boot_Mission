@@ -6,6 +6,7 @@ import dev.yoon.basic_board.domain.Post;
 import dev.yoon.basic_board.dto.PostDto;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface PostRepository {
 
@@ -19,5 +20,5 @@ public interface PostRepository {
 
     boolean deletePost(Long boardId, Long postId,String pw);
 
-
+    List<Post> findPostAllbyUserId(Long userId);
 }

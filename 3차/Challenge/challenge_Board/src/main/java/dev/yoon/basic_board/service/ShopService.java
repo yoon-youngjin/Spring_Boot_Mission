@@ -13,11 +13,10 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
-@Service
-@RequiredArgsConstructor
 @Slf4j
+@Service
 @Transactional
+@RequiredArgsConstructor
 public class ShopService {
 
     private final ShopRepository shopRepository;
@@ -36,6 +35,7 @@ public class ShopService {
 
         shopRepository.save(shop);
         return shopDto;
+
     }
 
     public List<ShopDto> readShopAll() {

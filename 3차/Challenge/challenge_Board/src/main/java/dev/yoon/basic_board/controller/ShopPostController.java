@@ -42,7 +42,7 @@ public class ShopPostController {
         if (shopPostDtos == null) {
             return ResponseEntity.notFound().build();
         }
-        Result result = new Result(shopPostDtos.size(),shopPostDtos);
+        Result result = new Result(shopPostDtos.size(), shopPostDtos);
 
         return ResponseEntity.ok(result);
     }

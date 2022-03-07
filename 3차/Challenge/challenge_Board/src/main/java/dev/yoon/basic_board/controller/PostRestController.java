@@ -1,6 +1,5 @@
 package dev.yoon.basic_board.controller;
 
-
 import dev.yoon.basic_board.dto.PostDto;
 import dev.yoon.basic_board.service.PostService;
 import lombok.RequiredArgsConstructor;

@@ -18,6 +18,4 @@ public class Area {
 
     @Embedded
     private Location location;
-
-
 }

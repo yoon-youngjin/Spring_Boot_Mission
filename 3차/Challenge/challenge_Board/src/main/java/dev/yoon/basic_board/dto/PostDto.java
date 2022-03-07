@@ -29,8 +29,8 @@ public class PostDto {
 
     public PostDto(Post post) {
         this.userId = post.getUser().getId();
-        this.boardId = post.getBoard().getId();
-        this.boardName = post.getBoard().getName();
+        this.boardId = post.getBoard().getId(); // LAZY
+        this.boardName = post.getBoard().getName(); // LAZY
         this.title = post.getTitle();
         this.content = post.getContent();
         this.writer = post.getWriter();

@@ -12,7 +12,6 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-@Transactional
 public class BoardRepositoryImpl implements BoardRepository {
 
     @PersistenceContext
