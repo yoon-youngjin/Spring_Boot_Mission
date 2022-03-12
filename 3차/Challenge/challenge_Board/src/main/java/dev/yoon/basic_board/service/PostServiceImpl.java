@@ -10,8 +10,10 @@ import dev.yoon.basic_board.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +36,7 @@ public class PostServiceImpl implements PostService {
         Optional<User> optionalUser = this.userRepository.findById(postDto.getUserId());
         Board board = this.boardRepository.findOne(boardId);
         if (optionalUser.isEmpty() || board == null) {
-            return null;
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
 
         User user = optionalUser.get();
@@ -52,7 +54,7 @@ public class PostServiceImpl implements PostService {
         List<Post> postList = this.postRepository.findPostAllbyBoardId(boardId);
 
         if(postList.isEmpty())
-            return null;
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 
         List<PostDto> postDtos = new ArrayList<>();
         for (Post post : postList) {
@@ -63,15 +65,25 @@ public class PostServiceImpl implements PostService {
     }
 
 
-    @SneakyThrows
     @Override
     public boolean updatePost(Long boardId, Long postId, PostDto postDto) {
-        return postRepository.updatePost(boardId,postId,postDto);
+        Board board = boardRepository.findOne(boardId);
+        Post post = postRepository.findPostOnebyBoardId(boardId, postId);
 
+        if (board == null || post == null)
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+
+        return postRepository.updatePost(boardId,postId,postDto);
     }
 
     @Override
     public boolean deletePost(Long boardId, Long postId, PostDto postDto) {
+        Board board = boardRepository.findOne(boardId);
+        Post post = postRepository.findPostOnebyBoardId(boardId, postId);
+
+        if (board == null || post == null)
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+
         return this.postRepository.deletePost(boardId, postId, postDto.getPw());
     }
 
@@ -80,7 +92,7 @@ public class PostServiceImpl implements PostService {
         Post post = this.postRepository.findPostOnebyBoardId(boardId, postId);
 
         if(post == null) {
-            return null;
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
         PostDto postDto = PostDto.createPostDtoPassWordMasked(post);
         return postDto;

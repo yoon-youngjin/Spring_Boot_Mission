@@ -9,8 +9,10 @@ import dev.yoon.basic_board.repository.PostRepository;
 import dev.yoon.basic_board.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -53,7 +55,7 @@ public class UserService {
         Optional<User> optionalUser = userRepository.findById(userId);
         List<Post> postList = postRepository.findPostAllbyUserId(userId);
         if (optionalUser.isEmpty())
-            return null;
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 
         UserDto dto = new UserDto(optionalUser.get(), postList);
         return dto;
@@ -62,7 +64,7 @@ public class UserService {
     public boolean updateUser(Long userId, UserDto userDto) {
         Optional<User> optionalUser = userRepository.findById(userId);
         if (optionalUser.isEmpty())
-            return false;
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 
         User user = optionalUser.get();
         user.update(userDto);
@@ -73,7 +75,7 @@ public class UserService {
     public boolean deleteUser(Long userId) {
         Optional<User> optionalUser = userRepository.findById(userId);
         if (optionalUser.isEmpty())
-            return false;
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         userRepository.deleteById(userId);
         return true;
     }

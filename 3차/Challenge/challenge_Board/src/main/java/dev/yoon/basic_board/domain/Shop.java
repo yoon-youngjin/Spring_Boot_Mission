@@ -10,7 +10,8 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Getter @Setter
+@Getter
+@Setter
 @NoArgsConstructor
 @Table(name = "SHOP")
 public class Shop {
@@ -19,29 +20,41 @@ public class Shop {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(
+            fetch = FetchType.LAZY,
+            targetEntity = User.class
+    )
     @JoinColumn(name = "user_id")
     private User user;
 
     @Enumerated(EnumType.STRING)
     private Category category;
 
-    @Embedded
-    private Address address;
+    @ManyToOne(
+            targetEntity = Area.class,
+            fetch = FetchType.LAZY
+    )
+    @JoinColumn(name = "located_at")
+    private Area location;
+
+//    @Embedded
+//    private Address address;
 
     // orphanRemoval = true : 고아가 된 자식 엔티티 자동 삭제
     // CascadeType.all : 연관관계가 하나인 경우만 가능
     // shoppost,shopreview 두개가 있으므로 불가
-    @OneToMany(mappedBy = "shop",orphanRemoval = true)
+    @OneToMany(mappedBy = "shop", orphanRemoval = true)
     private List<ShopPost> shopPosts;
 
-    @OneToMany(mappedBy = "shop",orphanRemoval = true)
+    @OneToMany(mappedBy = "shop", orphanRemoval = true)
     private List<ShopReview> shopReviews;
 
 
     public Shop(ShopDto shopDto) {
         this.category = shopDto.getCategory();
-        this.address = shopDto.getAddress();
+
+//        this.location = shopDto.getAddress();
+//        this.address = shopDto.getAddress();
     }
 
     public void addShopPost(ShopPost shopPost) {
@@ -57,6 +70,6 @@ public class Shop {
 
     public void update(ShopDto shopDto) {
         this.category = shopDto.getCategory();
-        this.address = shopDto.getAddress();
+//        this.address = shopDto.getAddress();
     }
 }

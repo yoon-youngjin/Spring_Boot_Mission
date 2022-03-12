@@ -25,11 +25,16 @@ public class Post {
 
     private String pw;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(
+            fetch = FetchType.LAZY,
+            targetEntity = Board.class)
+    // JoinColumn: DB상에 표현되고 싶은 이름
     @JoinColumn(name = "board_id")
     private Board board;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(
+            fetch = FetchType.LAZY,
+            targetEntity = User.class)
     @JoinColumn(name = "user_id")
     private User user;
 

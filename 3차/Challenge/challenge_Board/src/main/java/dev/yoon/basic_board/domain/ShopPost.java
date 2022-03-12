@@ -23,13 +23,15 @@ public class ShopPost {
 
     private String content;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnore
+    @ManyToOne(
+            fetch = FetchType.LAZY,
+            targetEntity = Shop.class
+    )
+    @JoinColumn(name = "shop_id")
     private Shop shop;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnore
-    private User user;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    private User user;
 
     public ShopPost(ShopPostDto shopPostDto) {
         this.title = shopPostDto.getTitle();
@@ -41,7 +43,7 @@ public class ShopPost {
 
         ShopPostDto shopPostDto = new ShopPostDto();
         shopPostDto.setShopId(shopPost.getShop().getId());
-        shopPostDto.setUserId(shopPost.getUser().getId());
+//        shopPostDto.setUserId(shopPost.getUser().getId());
         shopPostDto.setTitle(shopPost.getTitle());
         shopPostDto.setContent(shopPost.getContent());
         return shopPostDto;

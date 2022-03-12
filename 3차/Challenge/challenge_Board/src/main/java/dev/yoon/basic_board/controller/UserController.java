@@ -34,9 +34,6 @@ public class UserController {
         List<UserDto> userDtos = this.userService.readUserAll();
         Result result = new Result(userDtos.size(),userDtos);
 
-        if (userDtos == null) {
-            return ResponseEntity.notFound().build();
-        }
         return ResponseEntity.ok(result);
     }
 
@@ -44,8 +41,8 @@ public class UserController {
     public ResponseEntity<UserDto> readUserOne(
             @PathVariable("userId") Long userId) {
         UserDto userDto = this.userService.readUserOne(userId);
-        if (userDto == null)
-            return ResponseEntity.notFound().build();
+//        if (userDto == null)
+//            return ResponseEntity.notFound().build();
         return ResponseEntity.ok(userDto);
     }
 
@@ -54,9 +51,10 @@ public class UserController {
     public ResponseEntity<?> updateUser(
             @PathVariable("userId") Long userId,
             @RequestBody UserDto userDto) {
+        userService.updateUser(userId, userDto);
 
-        if (!userService.updateUser(userId, userDto))
-            return ResponseEntity.notFound().build();
+//        if (!userService.updateUser(userId, userDto))
+//            return ResponseEntity.notFound().build();
 
         return ResponseEntity.noContent().build();
     }
@@ -65,9 +63,10 @@ public class UserController {
     @DeleteMapping("{userId}")
     public ResponseEntity<?> deleteUser(
             @PathVariable("userId") Long userId) {
+        this.userService.deleteUser(userId);
 
-        if (!this.userService.deleteUser(userId))
-            return ResponseEntity.notFound().build();
+//        if (!this.userService.deleteUser(userId))
+//            return ResponseEntity.notFound().build();
 
         return ResponseEntity.noContent().build();
 

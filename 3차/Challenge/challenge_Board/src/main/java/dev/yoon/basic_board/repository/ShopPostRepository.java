@@ -14,5 +14,4 @@ public interface ShopPostRepository extends JpaRepository<ShopPost,Long> {
     @Query("select sp from ShopPost sp where sp.Id =:shopPostId and sp.shop.Id =:shopId")
     ShopPost findShopPostByShop(Long shopId, Long shopPostId);
 
-
 }

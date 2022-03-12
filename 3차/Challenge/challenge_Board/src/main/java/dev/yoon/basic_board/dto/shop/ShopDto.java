@@ -35,7 +35,7 @@ public class ShopDto {
     public ShopDto(Shop shop) {
         this.userId = shop.getUser().getId();
         this.category = shop.getCategory();
-        this.address = shop.getAddress();
+//        this.address = shop.getAddress();
 
         this.shopPostDtos = shop.getShopPosts().stream()
                 .map(shopPost -> new ShopPostDto(shopPost))

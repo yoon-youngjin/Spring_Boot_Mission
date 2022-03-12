@@ -28,12 +28,11 @@ public class PostRestController {
             HttpServletRequest request) throws Exception {
 
         postDto.setBoardId(id);
-//        log.info(request.getHeader("Content-Type"));
         PostDto dto = this.postService.createPost(id,postDto);
 
-        if(dto == null) {
-            return ResponseEntity.notFound().build();
-        }
+//        if(dto == null) {
+//            return ResponseEntity.notFound().build();
+//        }
         return ResponseEntity.ok(dto);
     }
 
@@ -41,12 +40,8 @@ public class PostRestController {
     public ResponseEntity<List<PostDto>> readPostAll(
             @PathVariable("boardId") Long boardId
     ) {
-        log.info("in read post all");
-
         List<PostDto> postDtoList = this.postService.readPostAllbyBoardId(boardId);
-        if(postDtoList == null) {
-            return ResponseEntity.notFound().build();
-        }
+
         return ResponseEntity.ok(postDtoList);
 
     }
@@ -55,11 +50,8 @@ public class PostRestController {
     public ResponseEntity<PostDto> readPostOne(
             @PathVariable("boardId") Long boardId,
             @PathVariable("postId") Long postId) {
-        log.info("in read post one");
 
         PostDto postDto = this.postService.readPostOneByBoardId(boardId, postId);
-        if(postDto == null)
-            return ResponseEntity.notFound().build();
 
         return ResponseEntity.ok(postDto);
     }
@@ -70,11 +62,9 @@ public class PostRestController {
             @PathVariable("boardId") Long boardId,
             @PathVariable("postId") Long postId,
             @RequestBody PostDto postDto) {
-        log.info("target id: " + postId);
-        log.info("update content: " + postDto);
-
-        if (!postService.updatePost(boardId, postId, postDto))
-            return ResponseEntity.notFound().build();
+        postService.updatePost(boardId, postId, postDto);
+//        if (!postService.updatePost(boardId, postId, postDto))
+//            return ResponseEntity.notFound().build();
         return ResponseEntity.noContent().build();
     }
 
@@ -84,9 +74,9 @@ public class PostRestController {
             @PathVariable("boardId") Long boardId,
             @PathVariable("postId") Long postId,
             @RequestBody PostDto postDto) {
-
-        if (!this.postService.deletePost(boardId, postId, postDto))
-            return ResponseEntity.notFound().build();
+        this.postService.deletePost(boardId, postId, postDto);
+//        if (!this.postService.deletePost(boardId, postId, postDto))
+//            return ResponseEntity.notFound().build();
 
         return ResponseEntity.noContent().build();
 

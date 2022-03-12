@@ -22,9 +22,12 @@ public class Board {
 
     private String name;
 
-    @OneToMany(mappedBy = "board", cascade = CascadeType.ALL)
-    @JsonIgnore
-    private List<Post> posts;
+    @OneToMany(
+            targetEntity = Post.class,
+            mappedBy = "board",
+            cascade = CascadeType.ALL)
+    // mappedby속성을 작성함으로써 board에서 사용했던 ManyToOne과 같은 관계임을 알려줌
+    private List<Post> posts = new ArrayList<>();
 
 
     public void addPost(Post post) {

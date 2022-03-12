@@ -24,7 +24,7 @@ public class ShopPostDto {
     private String content;
 
     public ShopPostDto(ShopPost shopPost) {
-        this.userId = shopPost.getUser().getId();
+//        this.userId = shopPost.getUser().getId();
         this.shopId = shopPost.getShop().getId();
         this.title = shopPost.getTitle();
         this.content = shopPost.getContent();
