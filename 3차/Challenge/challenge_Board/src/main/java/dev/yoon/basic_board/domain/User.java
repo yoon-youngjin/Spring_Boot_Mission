@@ -76,7 +76,7 @@ public class User {
 
     public void addShopPost(ShopPost shopPost) {
         shopPosts.add(shopPost);
-        shopPost.setUser(this);
+//        shopPost.setUser(this);
     }
 
     public void addShopReview(ShopReview shopReview) {

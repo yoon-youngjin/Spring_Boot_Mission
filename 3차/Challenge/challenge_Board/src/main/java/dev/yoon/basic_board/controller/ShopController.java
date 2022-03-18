@@ -22,18 +22,13 @@ public class ShopController {
 
     private final ShopService shopService;
 
-
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<ShopDto> creatShop(
             @RequestBody @Valid ShopDto shopDto) {
         ShopDto dto = this.shopService.createShop(shopDto);
 
-        if(dto == null) {
-            return ResponseEntity.noContent().build();
-        }
         return ResponseEntity.ok(dto);
-
     }
 
     @GetMapping()
@@ -42,9 +37,6 @@ public class ShopController {
         List<ShopDto> shopDtos = this.shopService.readShopAll();
         Result result = new Result(shopDtos.size(),shopDtos);
 
-        if (shopDtos == null) {
-            return ResponseEntity.notFound().build();
-        }
         return ResponseEntity.ok(result);
     }
 
@@ -54,9 +46,6 @@ public class ShopController {
     ) {
         ShopDto shopDto = this.shopService.readShopOne(shopId);
 
-        if (shopDto == null) {
-            return ResponseEntity.notFound().build();
-        }
         return ResponseEntity.ok(shopDto);
     }
 
@@ -65,9 +54,7 @@ public class ShopController {
     public ResponseEntity<?> updateShop(
             @PathVariable("shopId") Long shopId,
             @RequestBody ShopDto shopDto) {
-
-        if (!shopService.updateShop(shopId, shopDto))
-            return ResponseEntity.notFound().build();
+        shopService.updateShop(shopId, shopDto);
 
         return ResponseEntity.noContent().build();
     }
@@ -76,9 +63,7 @@ public class ShopController {
     @DeleteMapping("{shopId}")
     public ResponseEntity<?> deleteShop(
             @PathVariable("shopId") Long shopId) {
-
-        if (!this.shopService.deleteShop(shopId))
-            return ResponseEntity.notFound().build();
+        this.shopService.deleteShop(shopId);
 
         return ResponseEntity.noContent().build();
     }

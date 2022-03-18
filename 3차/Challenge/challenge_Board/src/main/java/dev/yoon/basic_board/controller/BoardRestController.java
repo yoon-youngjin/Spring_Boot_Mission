@@ -22,7 +22,6 @@ import java.util.List;
 public class BoardRestController {
     private final BoardService boardService;
 
-
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<BoardDto> createBoard(@RequestBody @Valid BoardDto boardDto, HttpServletRequest request) {
@@ -48,14 +47,9 @@ public class BoardRestController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping("{id}")
     public ResponseEntity<?> updateBoard(@PathVariable("id") Long id, @RequestBody BoardDto boardDto) {
-        log.info("target id: " + id);
-        log.info("update content: " + boardDto);
         if (!boardService.updateBoard(id, boardDto))
             return ResponseEntity.notFound().build();
-
         return ResponseEntity.noContent().build();
-
-
     }
 
     @ResponseStatus(HttpStatus.ACCEPTED)

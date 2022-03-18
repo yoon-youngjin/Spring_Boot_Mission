@@ -30,9 +30,6 @@ public class PostRestController {
         postDto.setBoardId(id);
         PostDto dto = this.postService.createPost(id,postDto);
 
-//        if(dto == null) {
-//            return ResponseEntity.notFound().build();
-//        }
         return ResponseEntity.ok(dto);
     }
 
@@ -63,8 +60,7 @@ public class PostRestController {
             @PathVariable("postId") Long postId,
             @RequestBody PostDto postDto) {
         postService.updatePost(boardId, postId, postDto);
-//        if (!postService.updatePost(boardId, postId, postDto))
-//            return ResponseEntity.notFound().build();
+
         return ResponseEntity.noContent().build();
     }
 
@@ -75,8 +71,6 @@ public class PostRestController {
             @PathVariable("postId") Long postId,
             @RequestBody PostDto postDto) {
         this.postService.deletePost(boardId, postId, postDto);
-//        if (!this.postService.deletePost(boardId, postId, postDto))
-//            return ResponseEntity.notFound().build();
 
         return ResponseEntity.noContent().build();
 

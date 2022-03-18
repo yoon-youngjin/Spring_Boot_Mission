@@ -30,8 +30,8 @@ public class ShopPost {
     @JoinColumn(name = "shop_id")
     private Shop shop;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    private User user;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User user;
 
     public ShopPost(ShopPostDto shopPostDto) {
         this.title = shopPostDto.getTitle();

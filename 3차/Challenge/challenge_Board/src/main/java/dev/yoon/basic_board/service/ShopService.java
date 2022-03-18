@@ -7,8 +7,10 @@ import dev.yoon.basic_board.repository.ShopRepository;
 import dev.yoon.basic_board.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -27,7 +29,7 @@ public class ShopService {
         Long userId = shopDto.getUserId();
         Optional<User> optionalUser = this.userRepository.findById(userId);
         if (optionalUser.isEmpty() || optionalUser.get().getVerify() == false)
-            return null;
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 
         User user = optionalUser.get();
         Shop shop = new Shop(shopDto);
@@ -50,7 +52,7 @@ public class ShopService {
     public ShopDto readShopOne(Long shopId) {
         Optional<Shop> optionalShop = shopRepository.findById(shopId);
         if (optionalShop.isEmpty())
-            return null;
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 
         ShopDto dto = new ShopDto(optionalShop.get());
         return dto;
@@ -60,7 +62,7 @@ public class ShopService {
         Optional<Shop> optionalShop = shopRepository.findById(shopId);
 
         if (optionalShop.isEmpty())
-            return false;
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 
         Shop shop = optionalShop.get();
         // 기존 사용자가 아닐 경우 예외
@@ -75,7 +77,8 @@ public class ShopService {
     public boolean deleteShop(Long shopId) {
         Optional<Shop> optionalShop = shopRepository.findById(shopId);
         if (optionalShop.isEmpty())
-            return false;
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+
         shopRepository.deleteById(shopId);
         return true;
 

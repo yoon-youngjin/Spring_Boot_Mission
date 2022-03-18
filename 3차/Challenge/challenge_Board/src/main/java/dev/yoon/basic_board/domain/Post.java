@@ -38,11 +38,6 @@ public class Post {
     @JoinColumn(name = "user_id")
     private User user;
 
-    // 연관관계 편의 메소드
-//    public void setBoard(Board board) {
-//        this.board = board;
-//        board.getPosts().add(this);
-//    }
 
     // 생성 메소드
     public static Post createPost(PostDto postDto) {
