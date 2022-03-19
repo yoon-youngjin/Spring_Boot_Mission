@@ -7,9 +7,7 @@
     <title>Simple LOGIN</title>
 </head>
 <body>
-<form th:action="@{/user/login}" method="post">
-    <input type="text" name="username" placeholder="아이디">
-    <input type="password" name="password" placeholder="비밀번호">
+<form th:action="@{/user/request-login}" method="post">
     <button type="submit">로그인</button>
 </form>
 

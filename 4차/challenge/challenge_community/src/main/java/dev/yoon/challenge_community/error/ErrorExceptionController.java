@@ -1,9 +1,9 @@
-package dev.yoon.basic_community.error;
+package dev.yoon.challenge_community.error;
 
-import dev.yoon.basic_community.exception.NameDuplicationException;
-import dev.yoon.basic_community.exception.PasswordNotEqualsPasswordCheckException;
-import dev.yoon.basic_community.exception.ShopNotFoundException;
-import dev.yoon.basic_community.exception.UserNotFoundException;
+import dev.yoon.challenge_community.exception.NameDuplicationException;
+import dev.yoon.challenge_community.exception.PasswordNotEqualsPasswordCheckException;
+import dev.yoon.challenge_community.exception.ShopNotFoundException;
+import dev.yoon.challenge_community.exception.UserNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
@@ -25,6 +25,7 @@ public class ErrorExceptionController {
     public ErrorResponse handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
         final List<ErrorResponse.FieldError> fieldErrors = getFieldErrors(e.getBindingResult());
         return buildFieldErrors(ErrorCode.INPUT_VALUE_INVALID, fieldErrors);
+
     }
 
     @ExceptionHandler(value = {

@@ -36,7 +36,6 @@ public class WebSecurityConfig {
                 })
                 .formLogin(formLogin -> {
                     formLogin.loginPage("/user/login");
-                    formLogin.defaultSuccessUrl("/home");
                     formLogin.successHandler(customSuccessHandler);
                     formLogin.permitAll();
                 })

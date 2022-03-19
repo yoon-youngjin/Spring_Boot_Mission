@@ -26,6 +26,6 @@ public class CustomSuccessHandler extends SavedRequestAwareAuthenticationSuccess
         cookie.setPath("/");
         response.addCookie(cookie);
 
-        response.sendRedirect("/home");
+//        response.sendRedirect("/home");
     }
 }
