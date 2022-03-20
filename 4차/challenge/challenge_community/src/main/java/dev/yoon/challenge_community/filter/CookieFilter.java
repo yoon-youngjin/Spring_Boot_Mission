@@ -25,6 +25,7 @@ public class CookieFilter implements Filter {
         HttpServletResponse httpServletResponse = (HttpServletResponse) response;
 
         Cookie[] cookies = httpServletRequest.getCookies();
+
         if (cookies != null) {
             for (int i = 0; i < cookies.length; i++) {
                 if (cookies[i].getName().equals("likelion_login_cookie")) {
@@ -35,7 +36,6 @@ public class CookieFilter implements Filter {
                         Cookie cookie = new Cookie("likelion_login_cookie", value);
                         cookie.setPath("/");
                         httpServletResponse.addCookie(cookie);
-
                         setAuthentication();
                     }
                     break;
@@ -45,9 +45,6 @@ public class CookieFilter implements Filter {
                 }
             }
         }
-
-
-
         chain.doFilter(httpServletRequest, httpServletResponse);
 
     }

@@ -1,12 +1,13 @@
 package dev.yoon.challenge_community.controller;
 
-import dev.yoon.challenge_community.AuthenticationFacade;
 import dev.yoon.challenge_community.domain.user.UserCategory;
 import dev.yoon.challenge_community.dto.UserDto;
 import dev.yoon.challenge_community.exception.PasswordNotEqualsPasswordCheckException;
 import dev.yoon.challenge_community.service.CommunityUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,21 +22,22 @@ import java.io.IOException;
 public class UserController {
 
     private final CommunityUserDetailsService communityUserDetailsService;
-    private final AuthenticationFacade authenticationFacade;
 
     @GetMapping("login")
-    public String login() {
+    public String login(
+            @RequestParam(value = "likelion_login_cookie", required = false) String likelion_login_cookie
+    ) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println(authentication.getDetails());
+        System.out.println(likelion_login_cookie);
         return "login-form";
     }
 
-    @PostMapping("/request-login")
+    @PostMapping("request-login")
     public void loginPost(
             HttpServletRequest request,
             HttpServletResponse response
     ) throws IOException {
-
-        System.out.println("request-login");
-
         response.sendRedirect("http://localhost:10000/request-login?request_from=" + request.getRemoteAddr());
     }
 
@@ -60,10 +62,6 @@ public class UserController {
                 .password(password)
                 .userCategory(isShopOwner ? UserCategory.OWNER : UserCategory.GENERAL)
                 .build();
-
-//        System.out.println(authenticationFacade.getAuthentication().getDetails());
-//        Cookie cookie = new Cookie("likelion_login_cookie", username);
-//        response.addCookie(cookie);
 
         communityUserDetailsService.createUser(dto);
         return "redirect:/home";
