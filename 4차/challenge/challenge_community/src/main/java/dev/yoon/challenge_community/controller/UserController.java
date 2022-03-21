@@ -23,6 +23,11 @@ public class UserController {
 
     private final CommunityUserDetailsService communityUserDetailsService;
 
+    @GetMapping("home")
+    public String home() {
+        return "index";
+    }
+
     @GetMapping("login")
     public String login(
             @RequestParam(value = "likelion_login_cookie", required = false) String likelion_login_cookie

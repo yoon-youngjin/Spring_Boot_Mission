@@ -1,7 +1,7 @@
-package dev.aquashdw.auth.client.repo;
+package dev.yoon.auth.client.repo;
 
-import dev.aquashdw.auth.client.entity.OAuthClientEntity;
-import dev.aquashdw.auth.client.entity.RedirectEntity;
+import dev.yoon.auth.client.entity.OAuthClientEntity;
+import dev.yoon.auth.client.entity.RedirectEntity;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

@@ -1,6 +1,6 @@
-package dev.aquashdw.auth.client.repo;
+package dev.yoon.auth.client.repo;
 
-import dev.aquashdw.auth.client.entity.OAuthClientEntity;
+import dev.yoon.auth.client.entity.OAuthClientEntity;
 import org.springframework.data.repository.CrudRepository;
 
 public interface ClientRepository extends CrudRepository<OAuthClientEntity, Long> {

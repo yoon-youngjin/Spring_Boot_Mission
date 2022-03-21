@@ -1,5 +1,6 @@
 package dev.yoon.basic_community.controller;
 
+
 import dev.yoon.basic_community.domain.user.UserCategory;
 import dev.yoon.basic_community.dto.UserDto;
 import dev.yoon.basic_community.exception.PasswordNotEqualsPasswordCheckException;

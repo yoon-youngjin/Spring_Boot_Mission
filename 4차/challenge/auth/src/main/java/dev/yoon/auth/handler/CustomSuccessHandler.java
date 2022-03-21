@@ -1,6 +1,5 @@
-package dev.aquashdw.auth.handler;
+package dev.yoon.auth.handler;
 
-import dev.aquashdw.auth.client.RegisteredClientService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;

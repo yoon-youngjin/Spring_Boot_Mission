@@ -1,6 +1,6 @@
-package dev.aquashdw.auth.user.repo;
+package dev.yoon.auth.user.repo;
 
-import dev.aquashdw.auth.user.entity.UserEntity;
+import dev.yoon.auth.user.entity.UserEntity;
 import org.springframework.data.repository.CrudRepository;
 
 public interface UserRepository extends CrudRepository<UserEntity, Long> {

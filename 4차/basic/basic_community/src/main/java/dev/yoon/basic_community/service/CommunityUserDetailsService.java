@@ -1,5 +1,6 @@
 package dev.yoon.basic_community.service;
 
+
 import dev.yoon.basic_community.domain.Area;
 import dev.yoon.basic_community.domain.user.User;
 import dev.yoon.basic_community.dto.UserDto;

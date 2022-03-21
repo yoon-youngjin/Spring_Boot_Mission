@@ -1,6 +1,6 @@
-package dev.aquashdw.auth.user.entity;
+package dev.yoon.auth.user.entity;
 
-import dev.aquashdw.auth.entity.BaseEntity;
+import dev.yoon.auth.entity.BaseEntity;
 
 import javax.persistence.*;
 

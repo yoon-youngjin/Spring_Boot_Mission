@@ -1,5 +1,6 @@
 package dev.yoon.basic_community.dto.shop;
 
+
 import dev.yoon.basic_community.domain.Address;
 import dev.yoon.basic_community.domain.Location;
 import dev.yoon.basic_community.domain.shop.Category;

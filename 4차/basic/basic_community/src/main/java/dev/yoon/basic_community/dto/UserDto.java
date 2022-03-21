@@ -1,8 +1,10 @@
 package dev.yoon.basic_community.dto;
 
+
 import dev.yoon.basic_community.domain.Address;
 import dev.yoon.basic_community.domain.Location;
 import dev.yoon.basic_community.domain.user.User;
+
 import dev.yoon.basic_community.domain.user.UserCategory;
 import dev.yoon.basic_community.dto.common.DateTime;
 import lombok.*;

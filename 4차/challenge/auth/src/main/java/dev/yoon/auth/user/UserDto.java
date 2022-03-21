@@ -1,4 +1,4 @@
-package dev.aquashdw.auth.user;
+package dev.yoon.auth.user;
 
 public class UserDto {
     private String username;

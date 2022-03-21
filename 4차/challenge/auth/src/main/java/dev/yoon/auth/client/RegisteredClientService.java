@@ -1,9 +1,9 @@
-package dev.aquashdw.auth.client;
+package dev.yoon.auth.client;
 
-import dev.aquashdw.auth.client.repo.ClientRepository;
-import dev.aquashdw.auth.client.repo.RedirectRepository;
-import dev.aquashdw.auth.client.entity.OAuthClientEntity;
-import dev.aquashdw.auth.client.entity.RedirectEntity;
+import dev.yoon.auth.client.repo.ClientRepository;
+import dev.yoon.auth.client.repo.RedirectRepository;
+import dev.yoon.auth.client.entity.OAuthClientEntity;
+import dev.yoon.auth.client.entity.RedirectEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

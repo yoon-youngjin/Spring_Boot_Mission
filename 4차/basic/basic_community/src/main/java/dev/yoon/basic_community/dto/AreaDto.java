@@ -1,5 +1,6 @@
 package dev.yoon.basic_community.dto;
 
+
 import dev.yoon.basic_community.domain.Address;
 import dev.yoon.basic_community.domain.Location;
 import lombok.*;

@@ -45,6 +45,7 @@ public class CookieFilter implements Filter {
                 }
             }
         }
+
         chain.doFilter(httpServletRequest, httpServletResponse);
 
     }
@@ -62,7 +63,7 @@ public class CookieFilter implements Filter {
 
             @Override
             public Object getDetails() {
-                return "Details";
+                return null;
             }
 
             @Override

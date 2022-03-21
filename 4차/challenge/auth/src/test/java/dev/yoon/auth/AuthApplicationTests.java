@@ -1,4 +1,4 @@
-package dev.aquashdw.auth;
+package dev.yoon.auth;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
