@@ -10,6 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 @Controller
 @Slf4j
 @RequestMapping("user")
@@ -33,8 +35,13 @@ public class UserController {
             @RequestParam("username") String username,
             @RequestParam("password") String password,
             @RequestParam("password_check") String passwordCheck,
-            @RequestParam(value = "is_shop_owner", required = false) boolean isShopOwner
+            @RequestParam(value = "is_shop_owner", defaultValue = "false") boolean isShopOwner
     ) {
+//        AtomicInteger i = new AtomicInteger(0);
+//
+//        areaEntityIterator.forEachRemaining(areaEntity -> {
+//            int idx = i.incrementAndGet();
+//        })
         if (!password.equals(passwordCheck))
             throw new PasswordNotEqualsPasswordCheckException();
 
@@ -45,6 +52,7 @@ public class UserController {
                 .build();
 
         communityUserDetailsService.createUser(dto);
+
         return "redirect:/home";
     }
 

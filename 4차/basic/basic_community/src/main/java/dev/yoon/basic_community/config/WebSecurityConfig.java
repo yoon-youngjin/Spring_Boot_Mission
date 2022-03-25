@@ -15,11 +15,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final CommunityUserDetailsService communityUserDetailsService;
+    private final LoginSuccressHandler loginSuccressHandler;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(communityUserDetailsService)
-                .passwordEncoder(new BCryptPasswordEncoder());
+        auth.userDetailsService(communityUserDetailsService);
+//                .passwordEncoder(new BCryptPasswordEncoder());
     }
 
 
@@ -35,6 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/user/login")
                 .defaultSuccessUrl("/home")
+                .successHandler(loginSuccressHandler)
                 .permitAll()
                 .and()
                 .logout()
@@ -43,6 +45,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .deleteCookies("JSESSIONID")
                 .invalidateHttpSession(true)
                 .permitAll();
+        
     }
 
 }

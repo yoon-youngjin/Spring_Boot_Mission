@@ -8,11 +8,13 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.time.Instant;
 import java.util.Collection;
 
 @Entity
 @ToString
 @Getter
+@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "community_user")
 public class User extends BaseTimeEntity implements UserDetails {
@@ -36,6 +38,20 @@ public class User extends BaseTimeEntity implements UserDetails {
     )
     @JoinColumn(name = "area_id")
     private Area residence;
+
+    @Column(updatable = false)
+    private Instant signUpDate;
+    private Instant lastLogin;
+
+    public User(Long id, String username, String password, UserCategory isShopOwner, Area residence) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.isShopOwner = isShopOwner;
+        this.residence = residence;
+        this.signUpDate = Instant.now();
+        this.lastLogin = Instant.now();
+    }
 
     @Builder
     public User(String username, String password, Area residence, UserCategory isShopOwner) {

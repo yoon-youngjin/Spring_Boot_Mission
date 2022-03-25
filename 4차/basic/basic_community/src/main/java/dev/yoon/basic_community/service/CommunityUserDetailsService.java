@@ -9,9 +9,11 @@ import dev.yoon.basic_community.exception.UserNotFoundException;
 import dev.yoon.basic_community.repository.AreaRepository;
 import dev.yoon.basic_community.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,33 +22,40 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 @Transactional
 public class CommunityUserDetailsService implements UserDetailsService {
 
     private final UserRepository userRepository;
     private final AreaRepository areaRepository;
-
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public User loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.findByUsername(username)
+
+        User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException(username));
+
+        log.info("username: {} last login: {}",user.getUsername(), user.getLastLogin());
+
+
+        return user;
     }
 
     public UserDto.Res createUser(UserDto.SignUpReq dto) {
 
         isExistedName(dto.getName());
 
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        dto.setPassword(encoder.encode(dto.getPassword()));
+//        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+//        dto.setPassword(encoder.encode(dto.getPassword()));
 
         Optional<Area> optionalArea = areaRepository.findById(1L);
 
         User user = User.builder()
                 .username(dto.getName())
                 .residence(optionalArea.get())
-                .password(dto.getPassword())
+                .password(passwordEncoder.encode(dto.getPassword()))
                 .isShopOwner(dto.getUserCategory())
                 .build();
 

@@ -1,5 +1,6 @@
 package dev.yoon.basic_community.controller;
 
+import dev.yoon.basic_community.config.AuthenticationFacade;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
@@ -13,20 +14,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Slf4j
 public class HomeController {
 
-//    private final AuthenticationFacade authenticationFacade;
+    private final AuthenticationFacade authenticationFacade;
 
     @GetMapping
     public String home(Authentication authentication) {
         try {
-//            Object details = authenticationFacade.getAuthentication().getDetails();
-//            log.info("detatils: {}", details);
-
-//            Object details = SecurityContextHolder.getContext().getAuthentication().getDetails();
-//            log.info("detatils: {}",details);
-//
-//            log.info("connected user:{}", authentication.getName());
-//            log.info("get Details:{}", authentication.getDetails());
-//            log.info("connected user:{}", principal.getName());
+            log.info("connected user: {}",
+                    authenticationFacade.getAuthentication().getName());
+            log.info(authenticationFacade.getAuthentication().getClass().toString());
         } catch (NullPointerException e) {
             log.info("no user logged in");
         }

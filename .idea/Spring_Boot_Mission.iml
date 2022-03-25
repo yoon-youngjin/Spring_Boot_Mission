@@ -2,7 +2,27 @@
 <module type="JAVA_MODULE" version="4">
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
-    <content url="file://$MODULE_DIR$" />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/2차/Basic/basic_Board/.gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/2차/Basic/basic_Board/.idea" />
+      <excludeFolder url="file://$MODULE_DIR$/2차/Challenge/Board/.gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/2차/Challenge/Board/.idea" />
+      <excludeFolder url="file://$MODULE_DIR$/3차/Basic/basic_Board/.gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/3차/Basic/basic_Board/.idea" />
+      <excludeFolder url="file://$MODULE_DIR$/3차/Basic/basic_Board/build" />
+      <excludeFolder url="file://$MODULE_DIR$/3차/Challenge/challenge_Board/.gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/3차/Challenge/challenge_Board/.idea" />
+      <excludeFolder url="file://$MODULE_DIR$/3차/Challenge/challenge_Board/build" />
+      <excludeFolder url="file://$MODULE_DIR$/4차/basic/basic_community/.gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/4차/basic/basic_community/.idea" />
+      <excludeFolder url="file://$MODULE_DIR$/4차/basic/basic_community/build" />
+      <excludeFolder url="file://$MODULE_DIR$/4차/challenge/auth/.gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/4차/challenge/auth/.idea" />
+      <excludeFolder url="file://$MODULE_DIR$/4차/challenge/auth/build" />
+      <excludeFolder url="file://$MODULE_DIR$/4차/challenge/challenge_community/.gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/4차/challenge/challenge_community/.idea" />
+      <excludeFolder url="file://$MODULE_DIR$/4차/challenge/challenge_community/build" />
+    </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
