@@ -2,6 +2,7 @@ package dev.yoon.challenge_community.filter;
 
 import dev.yoon.challenge_community.LikelionSsoConsts;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,6 +19,7 @@ import java.util.Collections;
 
 @Slf4j
 @Component
+@Order(value = 1)
 public class CookieFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {

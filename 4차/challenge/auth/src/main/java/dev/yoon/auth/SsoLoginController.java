@@ -32,6 +32,5 @@ public class SsoLoginController {
          */
         return String.format(
                 "redirect:%s?likelion_login_cookie=%s", requestFrom, cookieValue);
-
     }
 }

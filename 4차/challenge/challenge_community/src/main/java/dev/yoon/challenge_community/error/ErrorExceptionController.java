@@ -20,12 +20,14 @@ import java.util.stream.Collectors;
 @Slf4j
 public class ErrorExceptionController {
 
+    /**
+     * Valid 예외 처리
+     */
     @ExceptionHandler(value = {MethodArgumentNotValidException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorResponse handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
         final List<ErrorResponse.FieldError> fieldErrors = getFieldErrors(e.getBindingResult());
         return buildFieldErrors(ErrorCode.INPUT_VALUE_INVALID, fieldErrors);
-
     }
 
     @ExceptionHandler(value = {

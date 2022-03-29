@@ -24,7 +24,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      * request-login path는 로그인이 필요한 경로
      * 스프링부트 내부에 정의가 된 형태로 들어오면
      * 마지막으로 들어온 요청을 저장
-     * 요청 저장 후 로그인 페이지로 redirect
+     * 요청 저장 후 로그인 페이지로 redirectx
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {

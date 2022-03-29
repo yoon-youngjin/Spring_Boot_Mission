@@ -2,6 +2,7 @@ package dev.yoon.challenge_community.filter;
 
 import dev.yoon.challenge_community.LikelionSsoConsts;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -23,7 +24,9 @@ import java.util.Optional;
  */
 @Component
 @Slf4j
+@Order(value = 2)
 public class SsoAuthFilter implements Filter {
+
     @Override
     public void doFilter(
             ServletRequest request,
